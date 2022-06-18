@@ -33,7 +33,7 @@ void AsyncLogging::append(const char *buf, int len)
     }
     else // 如果当前Buffer已满，需要通知日志线程有数据可写
     {
-        // 把当前Buffer 添加到列表中
+        // 把当前Buffer 添加到队列中
         buffers_.push_back(std::move(current_buffer_));
         // 将下一个Buffer 设置为当前 Buffer
         if (next_buffer_)
@@ -60,7 +60,7 @@ void AsyncLogging::writeThread()
     BufferPtr new_buffer2(new Buffer);
     new_buffer1->bzero();
     new_buffer2->bzero();
-    // Buffer列表
+    // Buffer队列
     BufferVector buffers_to_write;
     buffers_to_write.reserve(8);
 
@@ -88,7 +88,7 @@ void AsyncLogging::writeThread()
                 // 如果 next_buffer_ 也被使用，需要将它设置为 new_buffer2
                 next_buffer_ = std::move(new_buffer2);
             }
-        }
+        } // 退出临界区
 
         if (buffers_to_write.size() > 16)
         {
