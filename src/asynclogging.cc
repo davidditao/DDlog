@@ -108,13 +108,20 @@ void AsyncLogging::writeThread()
             buffers_to_write.resize(2);
         }
 
-        //
         if (!new_buffer1)
         {
+            // 从 buffers_to_write中弹出一个作为newBUffer1
+            new_buffer1 = std::move(buffers_to_write.back());
+            buffers_to_write.pop_back();
+            // 清理 newBuffer1
+            new_buffer1->reset();
         }
 
         if (!new_buffer2)
         {
+            new_buffer2 = std::move(buffers_to_write.back());
+            buffers_to_write.pop_back();
+            new_buffer2->reset();
         }
         buffers_to_write.clear();
         output.flush();

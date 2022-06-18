@@ -25,7 +25,7 @@ void Logger::setLogLevel(LogLevel level)
 // 全局变量：当前日志级别, 默认为 INFO
 Logger::LogLevel g_log_level = Logger::INFO;
 
-// 全局变量：annotations，默认为false
+// 全局变量：是否使用异步日志，默认为false
 bool g_is_async_ = false;
 
 // 该类方便存储字符串长度信息

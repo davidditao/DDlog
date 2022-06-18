@@ -44,13 +44,13 @@ public:
 
     ~Logger();
 
-    // annotations
+    // 返回LogStream对象
     LogStream &stream() { return impl_.stream_; }
     // 返回当前日志级别
     static LogLevel logLevel();
     // 设置当前日志级别
     static void setLogLevel(LogLevel level);
-    // annotations
+    // 设置为异步日志 
     static void setAsync();
 
     // 输出方法回调
@@ -78,8 +78,8 @@ public:
     };
 
 private:
-    Impl impl_;            // annotations
-    static bool is_async_; // annotations
+    Impl impl_;            // Impl 对象
+    static bool is_async_; // 是否使用异步日志
 };
 
 // 全局变量：当前日志级别
@@ -90,9 +90,9 @@ inline Logger::LogLevel Logger::logLevel()
     return g_log_level;
 }
 
-// 全局变量：annotations
+// 全局变量：是否使用异步日志
 extern bool g_is_async_;
-// annotations
+// 设置为异步日志 
 inline void Logger::setAsync()
 {
     g_is_async_ = true;

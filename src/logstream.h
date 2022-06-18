@@ -5,8 +5,8 @@
 #include <string>
 #include <string.h> // memcpy
 
-const int kSmallBuffer = 4000;        // annotations
-const int KLargeBuffer = 4000 * 1000; // annotations
+const int kSmallBuffer = 4000;        // 小Buffer大小：供LogStream使用
+const int KLargeBuffer = 4000 * 1000; // 大Buffer大小：供AsyncLogging使用
 
 /**
  * 缓冲区类
