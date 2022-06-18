@@ -73,7 +73,6 @@ void AsyncLogging::writeThread()
             std::unique_lock<std::mutex> guard(mutex_);
             if (buffers_.empty())
             {
-
                 // 如果没人唤醒，等待指定时间
                 cond_.wait_for(guard, std::chrono::milliseconds(flush_interval_));
             }
