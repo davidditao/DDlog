@@ -53,6 +53,7 @@ inline LogStream &operator<<(LogStream &s, Logger::SourceFile v)
 // 默认输出到stdout
 void defaultOutput(const LogStream::Buffer &buf)
 {
+    // fwrite 是线程安全的！
     size_t n = fwrite(buf.data(), 1, static_cast<size_t>(buf.length()), stdout);
     // FIXME check n
     (void)n;
