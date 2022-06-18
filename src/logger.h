@@ -19,7 +19,7 @@ public:
         FATAL,
         NUM_LOG_LEVELS,
     };
-
+    
     // 内部类：文件相关操作
     class SourceFile
     {
