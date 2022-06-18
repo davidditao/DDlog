@@ -85,7 +85,7 @@ void AsyncLogging::writeThread()
             buffers_to_write.swap(buffers_);
             if (!next_buffer_)
             {
-                // 如果 next_buffer_ 也被使用，需要将它设置为 new_buffer2
+                // 将 next_buffer_ 设置为 new_buffer2：这样前端始终有一个预备的buffer可以使用
                 next_buffer_ = std::move(new_buffer2);
             }
         } // 退出临界区
