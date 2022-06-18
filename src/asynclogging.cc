@@ -71,8 +71,12 @@ void AsyncLogging::writeThread()
         { // 锁的临界区
             // 加锁
             std::unique_lock<std::mutex> guard(mutex_);
-            // 如果没人唤醒，等待指定时间
-            cond_.wait_for(guard, std::chrono::milliseconds(flush_interval_));
+            if (buffers_.empty())
+            {
+
+                // 如果没人唤醒，等待指定时间
+                cond_.wait_for(guard, std::chrono::milliseconds(flush_interval_));
+            }
 
             // 这里还需要将 current_buffer_ 放入列表中
             buffers_.push_back(std::move(current_buffer_));
