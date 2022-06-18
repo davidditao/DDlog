@@ -104,7 +104,7 @@ inline void Logger::setAsync()
 // 设置当前日志级别
 #define SET_LOGLEVEL(x) Logger::setLogLevel(x);
 
-// annotations
+// 设置为异步日志
 #define LOG_SET_ASYNC(x)                                                                       \
     if (x != 0)                                                                                \
     {                                                                                          \
