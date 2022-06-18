@@ -28,7 +28,7 @@ Logger::LogLevel g_log_level = Logger::INFO;
 // 全局变量：annotations，默认为false
 bool g_is_async_ = false;
 
-// annotations
+// 该类方便存储字符串长度信息
 class T
 {
 public:
@@ -81,9 +81,10 @@ Logger::Logger(SourceFile file, int line, LogLevel level, const char *func_name)
     impl_.stream_ << func_name << ' ';
 }
 
+// Logger对象析构的时候将缓冲区中的内容输出
 Logger::~Logger()
 {
-    // 输出换行符
+    // 将换行符写入缓冲区中
     stream() << "\n";
 
     const LogStream::Buffer &buf(stream().buffer());
@@ -91,6 +92,7 @@ Logger::~Logger()
     g_output_func(buf);
 }
 
+// Impl对象构造时就将日志的消息格式拼接后写入缓冲区中
 Logger::Impl::Impl(LogLevel level, const SourceFile &file, int line)
     : time_(Timestamp::now()),
       stream_(),

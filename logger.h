@@ -58,7 +58,7 @@ public:
     // 设置输出方法
     static void setOutputFunc(OutputFunc func);
 
-    // 内部类: annotations
+    // 内部类: 日志消息的格式
     class Impl
     {
     public:
@@ -70,11 +70,11 @@ public:
         // 获取当前线程id
         void getThreadId();
 
-        int64_t time_;
-        LogStream stream_;
-        LogLevel level_;
-        SourceFile file_;
-        int line_;
+        int64_t time_;     // 当前时间
+        LogStream stream_; // 输出流(其中有一个缓冲区)
+        LogLevel level_;   // 日志等级
+        SourceFile file_;  // 文件名
+        int line_;         // 当前行
     };
 
 private:

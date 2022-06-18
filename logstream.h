@@ -6,7 +6,7 @@
 #include <string.h> // memcpy
 
 const int kSmallBuffer = 4000;        // annotations
-const int KLargeBUffer = 4000 * 1000; // annotations
+const int KLargeBuffer = 4000 * 1000; // annotations
 
 /**
  * 缓冲区类
@@ -34,15 +34,17 @@ public:
     // 返回缓冲区头指针
     const char *data() const { return data_; }
     // 返回已使用长度
-    int length() const { return static_cast<int>(cur - data); }
+    int length() const { return static_cast<int>(cur - data_); }
     // 当前指针向后移动 len 个位置
     void add(size_t len) { cur_ += len; }
     // 返回当前位置指针
     char *current() { return cur_; }
     // 重置缓冲区
-    void reset() { cur_ = data; }
+    void reset() { cur_ = data_; }
+    // 将缓冲区置空
+    void bzero() { memset(); }
     // 返回缓冲区剩余大小
-    int avail() const { return static_cast<int>(end() - cur); }
+    int avail() const { return static_cast<int>(end() - cur_); }
 
 private:
     // 返回缓冲区末尾指针
